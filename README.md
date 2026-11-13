@@ -2,13 +2,15 @@
 
 This folder contains a newly written, standalone reconstruction of the historical **Crumble** screen effect. It is not recovered original source code.
 
+**Live demo:** <https://owhall.github.io/crumble/>
+
 ## Run it
 
 No installation or build is required.
 
-- **Windows:** double-click `run-crumble.bat`, or double-click `crumble.html`.
-- **Linux:** run `sh run-crumble.sh`, or open `crumble.html` in a modern browser. You may instead make the launcher executable with `chmod +x run-crumble.sh` and then use `./run-crumble.sh`.
-- Any platform: drag `crumble.html` into Firefox, Chrome, Edge, or another current browser.
+- **Windows:** double-click `run-crumble.bat`, or double-click `index.html`.
+- **Linux:** run `sh run-crumble.sh`, or open `index.html` in a modern browser. You may instead make the launcher executable with `chmod +x run-crumble.sh` and then use `./run-crumble.sh`.
+- Any platform: drag `index.html` into Firefox, Chrome, Edge, or another current browser.
 
 The program runs locally and makes no network requests. For the most period-like view, choose **Fullscreen**. Use Space to pause, R to reset, F for fullscreen, and H to hide the controls.
 
@@ -51,7 +53,7 @@ Accordingly, it would be inaccurate to call the effect originally a “late-1980
 
 ## Reconstruction design
 
-`crumble.html` is an original clean-room behavioral reconstruction written in HTML, CSS, and JavaScript. It:
+`index.html` is an original clean-room behavioral reconstruction written in HTML, CSS, and JavaScript. The legacy `crumble.html` address redirects to it. The reconstruction:
 
 - renders black monospace text on a white 720×450 logical bitmap;
 - presents a clean one-bit text image for three seconds before decay begins;
