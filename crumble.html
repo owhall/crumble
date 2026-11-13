@@ -72,6 +72,7 @@
   let running = true;
   let seed = 0x4352554d;
   let last = 0, accumulator = 0;
+  let crumbleStartsAt = 0;
 
   const sample = [
     'SunOS UNIX (workstation)                      Thu Nov 12 14:37',
@@ -106,14 +107,17 @@
 
   function reset() {
     cells.fill(EMPTY); particles = []; fixedCount = 0; seed = 0x4352554d;
+    crumbleStartsAt = performance.now() + 3000;
     sx.fillStyle = '#fff'; sx.fillRect(0, 0, W, H);
     sx.fillStyle = '#000';
-    sx.font = '15px "Courier New", "Liberation Mono", monospace';
+    sx.font = '16px "Lucida Console", "DejaVu Sans Mono", "Liberation Mono", monospace';
     sx.textBaseline = 'top';
     sample.forEach((line, i) => sx.fillText(line, 24, 20 + i * 19));
     const image = sx.getImageData(0, 0, W, H).data;
     for (let i = 0; i < cells.length; i++) {
-      if (image[i * 4] < 96) { cells[i] = FIXED; fixedCount++; }
+      // Convert the antialiased browser font to a solid one-bit bitmap. A
+      // generous threshold keeps complete strokes instead of fax-like gaps.
+      if (image[i * 4] < 208) { cells[i] = FIXED; fixedCount++; }
     }
     draw();
   }
@@ -172,7 +176,10 @@
     particles = particles.filter(p => !p.dead);
   }
 
-  function update() { erode(); moveParticles(); }
+  function update(now) {
+    if (now >= crumbleStartsAt) erode();
+    moveParticles();
+  }
 
   function draw() {
     const image = ctx.createImageData(W, H);
@@ -195,7 +202,7 @@
     const dt = Math.min(100, now - last); last = now;
     if (running) {
       accumulator += dt;
-      while (accumulator >= 20) { update(); accumulator -= 20; }
+      while (accumulator >= 20) { update(now); accumulator -= 20; }
       draw();
     }
     requestAnimationFrame(frame);

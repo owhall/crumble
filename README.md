@@ -54,6 +54,7 @@ Accordingly, it would be inaccurate to call the effect originally a “late-1980
 `crumble.html` is an original clean-room behavioral reconstruction written in HTML, CSS, and JavaScript. It:
 
 - renders black monospace text on a white 720×450 logical bitmap;
+- presents a clean one-bit text image for three seconds before decay begins;
 - releases individual edge pixels from glyphs;
 - applies gravity to each released pixel;
 - lets pixels slide and accumulate into dust piles;
